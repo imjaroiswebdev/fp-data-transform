@@ -39,7 +39,7 @@ const groupByUser = R.groupBy(R.prop('username'))
 const activeByUser = R.compose(groupByUser, incomplete)
 const byUser = R.useWith(R.filter, [R.propEq('username')])
 
-const resumeData = R.compose(
+const sumarizeData = R.compose(
   infoFields,
   R.take(5),
   sortByDateDescend
@@ -47,22 +47,22 @@ const resumeData = R.compose(
 
 function infoByUser (user) {
   return R.compose(
-    resumeData,
+    sumarizeData,
     byUser(user)
   )
 }
 
 const infoAllUsers = R.compose(
-  R.map(resumeData),
+  R.map(sumarizeData),
   activeByUser
 )
 
 console.log('\n===========================')
-console.log('Active tasks resume by user...')
+console.log('Active tasks sumarized by user...')
 log(infoAllUsers(tasks))
 
 console.log('\n===========================')
-console.log('Active tasks resume of Richard...')
+console.log('Sumarized active tasks of Richard...')
 const infoForRichard = infoByUser('Richard')
 log(infoForRichard(tasks))
 
